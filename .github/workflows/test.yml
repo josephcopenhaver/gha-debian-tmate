@@ -1,0 +1,17 @@
+on:
+  push:
+    tags:
+      - test
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5 # NOTE: really important to use this! Don't set higher than 30 minutes!
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: start tmate
+        run: |
+          bash ./scripts/start-tmate.sh
+      - name: wait for tmate to stop
+        run: |
+          bash ./scripts/wait-for-tmate-stop.sh
